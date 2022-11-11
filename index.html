@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Personal Website</title>
 
     <!-- Meta tag Keywords -->
@@ -350,62 +351,70 @@
           </div>
           <div class="col-lg-7 mt-lg-0 mt-5 contact-right">
             <h4 class="mb-4">Get In Touch</h4>
-            <form action="#" method="post">
-              <label
-                ><span class="fa mr-2 fa-user" aria-hidden="true"></span>
-                Name</label
-              >
-              <input
-                type="text"
-                name="Name"
-                value="Name"
-                onfocus="this.value = '';"
-                onblur="if (this.value == '') {this.value = 'Name';}"
-                required=""
-              />
-              <div class="clearfix"></div>
-              <label
-                ><span
-                  class="fa mr-2 fa-envelope-open"
-                  aria-hidden="true"
-                ></span
-                >Email</label
-              >
-              <input
-                type="email"
-                name="Email"
-                value="Email"
-                onfocus="this.value = '';"
-                onblur="if (this.value == '') {this.value = 'Email';}"
-                required=""
-              />
-              <div class="clearfix"></div>
-              <label
-                ><span class="fa mr-2 fa-phone" aria-hidden="true"></span
-                >Phone</label
-              >
-              <input
-                type="text"
-                name="Phone"
-                value="Phone"
-                onfocus="this.value = '';"
-                onblur="if (this.value == '') {this.value = 'Phone';}"
-                required=""
-              />
-              <div class="clearfix"></div>
-              <label
-                ><span class="fa mr-2 fa-edit" aria-hidden="true"></span
-                >Message</label
-              >
-              <textarea
-                name="Message"
-                onfocus="this.value = '';"
-                onblur="if (this.value == '') {this.value = 'Message...';}"
-                required=""
-              >
-Message...</textarea
-              >
-              <button type="submit" class="btn">Submit</button>
+            <form id="submit-form" action="" class="email-form mt-4">
+              <div class="row">
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    id="name"
+                    placeholder="Your Name"
+                    onkeyup="validateName()"
+                    required
+                  />
+                  <span id="name-error" class="validation-label"></span>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    id="email"
+                    placeholder="Your Email"
+                    onkeyup="validateEmail()"
+                    required
+                  />
+                  <span id="email-error" class="validation-label"></span>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="subject"
+                  id="subject"
+                  placeholder="Subject"
+                  onkeyup="validateSubject()"
+                  required
+                />
+                <span id="subject-error" class="validation-label"></span>
+              </div>
+              <div class="form-group mt-3">
+                <textarea
+                  class="form-control"
+                  name="message"
+                  id="message"
+                  rows="5"
+                  placeholder="Message"
+                  onkeyup="validateMessage()"
+                  required
+                ></textarea>
+                <span id="message-error" class="validation-label"></span>
+              </div>
+              <div class="my-3">
+                <!-- <div class="loading">Loading</div> -->
+                <div class="error-message"></div>
+                <!-- <div class="sent-message">
+                  Your message has been sent. Thank you!
+                </div> -->
+              </div>
+              <div class="text-center form-control-submit-button">
+                <button type="submit" onclick="return validateForm()">
+                  Send Message
+                </button>
+              </div>
+              <span id="submit-error" class="text-center button-form"></span>
             </form>
           </div>
         </div>
@@ -421,13 +430,19 @@ Message...</textarea
             <div class="social mb-4">
               <ul>
                 <li>
-                  <a href="#"><span class="fa mr-2 fa-facebook"></span></a>
+                  <a href="https://www.facebook.com/yadhu.adam" target="_blank"
+                    ><span class="fa mr-2 fa-facebook"></span
+                  ></a>
                 </li>
                 <li>
                   <a href="#"><span class="fa mr-2 fa-twitter"></span></a>
                 </li>
                 <li>
-                  <a href="#"><span class="fa mr-2 fa-google-plus"></span></a>
+                  <a
+                    href="https://instagram.com/peacefighter02?igshid=YmMyMTA2M2Y="
+                    target="_blank"
+                    ><span class="fa mr-2 fa-instagram"></span
+                  ></a>
                 </li>
                 <li>
                   <a href="#"><span class="fa mr-2 fa-pinterest"></span></a>
@@ -571,5 +586,24 @@ Message...</textarea
       </div>
     </div>
     <!-- //popup for gallery -->
+    <script>
+      $("#submit-form").submit((e) => {
+        e.preventDefault();
+        $.ajax({
+          url: "https://script.google.com/macros/s/AKfycby49GODgsDalpGcXha2Vayu9OWXKpZjQJAjwFfXcRAnSpW1Yy7PJygnqXooqfyFFjhJtA/exec",
+          data: $("#submit-form").serialize(),
+          method: "post",
+          success: function (response) {
+            alert("Form submitted successfully");
+            window.location.reload();
+            //window.location.href="https://google.com"
+          },
+          error: function (err) {
+            alert("Something Error");
+          },
+        });
+      });
+    </script>
+    <script src="./script.js"></script>
   </body>
 </html>
